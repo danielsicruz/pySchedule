@@ -3,13 +3,13 @@ from tkinter import ttk
 from agenda_logic import *  # Importa todas as funções de lógica do arquivo agenda_logic.py
 
 # Definir o nome da sala
-room_name = "Sala 1"
+room_name = "FABLAB"
 
 # Função para verificar se o evento está em andamento
 def is_event_in_progress(start_time_str, end_time_str):
     now = datetime.now(BRASILIA_TZ)  # Hora atual no fuso horário GMT-3
-    start_time = datetime.fromisoformat(start_time_str.replace('T', ' ')).replace(tzinfo=pytz.utc).astimezone(BRASILIA_TZ)
-    end_time = datetime.fromisoformat(end_time_str.replace('T', ' ')).replace(tzinfo=pytz.utc).astimezone(BRASILIA_TZ)
+    start_time = datetime.strptime(start_time_str, '%m/%d/%Y %I:%M:%S %p').replace(tzinfo=pytz.utc).astimezone(BRASILIA_TZ)
+    end_time = datetime.strptime(end_time_str, '%m/%d/%Y %I:%M:%S %p').replace(tzinfo=pytz.utc).astimezone(BRASILIA_TZ)
     
     # Verifica se a hora atual está dentro do intervalo do evento
     return start_time <= now <= end_time
@@ -20,10 +20,10 @@ def update_appointments():
     appointments = load_appointments_from_json('appointments.json')  # Caminho para o arquivo JSON
     
     # Filtrar os agendamentos com base na sala (Remover esse filtro no principal/server)
-    filtered_appointments = filter_appointments_by_room(room_name, appointments)
+    #filtered_appointments = filter_appointments_by_room(room_name, appointments)
     
     # Filtrar os agendamentos futuros
-    filtered_appointments = filter_appointments_future(filtered_appointments)
+    filtered_appointments = filter_appointments_future(appointments)
 
     # Ordenar os agendamentos por horário de início (start_time)
     sorted_appointments = sort_appointments_by_start_time(filtered_appointments)
@@ -34,21 +34,28 @@ def update_appointments():
     
     # Preencher a tabela com os novos agendamentos
     for appointment in sorted_appointments:
-        start_time = format_datetime(appointment.get('start', {}).get('dateTime', 'N/A'))
-        end_time = format_datetime(appointment.get('end', {}).get('dateTime', 'N/A'))
-        subject = appointment.get('subject', 'Sem assunto')
-        location = appointment.get('location', {}).get('displayName', 'Sem local')
-        organizer = appointment.get('organizer',{}).get('emailAddress', {}).get('name','Não definido')
+        start_time = format_datetime(appointment.get('start', {}))
+        end_time = format_datetime(appointment.get('end', {}))
+        subject = appointment.get('cc', 'Sem assunto')
+        locations = appointment.get('location', {})
+        organizer = appointment.get('organizer',"Não definido")
 
         # Verificar se o evento está em andamento
-        in_progress = is_event_in_progress(appointment.get('start', {}).get('dateTime', ''), 
-                                           appointment.get('end', {}).get('dateTime', ''))
+        in_progress = is_event_in_progress(appointment.get('start', {}), 
+                                           appointment.get('end', {}))
         
-        # Inserir os dados na tabela
-        item_id = tree.insert('', 'end', values=(subject, start_time, end_time, location, organizer))
-        # Se o evento estiver em andamento, aplicar o fundo amarelo
-        if in_progress:
-            tree.item(item_id, tags=('in_progress',))
+        locations_str = appointment.get('locations', '[]')
+        try:
+            locations = json.loads(locations_str)
+        except json.JSONDecodeError:
+            locations = []
+
+        for location in locations:
+            thislocation = location.get('DisplayName', "Não definido")
+            item_id = tree.insert('', 'end', values=(subject, start_time, end_time, thislocation, organizer))
+            if in_progress:
+                tree.item(item_id, tags=('in_progress',))
+
     
     
     # Atualizar a tabela a cada 10 segundos (pode ser ajustado)
