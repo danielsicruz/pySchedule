@@ -1,0 +1,161 @@
+{
+    "value": [
+        {
+            "id": "1",
+            "subject": "Reunião de Planejamento",
+            "start": {
+                "dateTime": "2025-08-12T09:00:00",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2025-08-12T10:00:00",
+                "timeZone": "UTC"
+            },
+            "location": {
+                "displayName": "Sala 1"
+            },
+            "attendees": [
+                {
+                    "emailAddress": {
+                        "address": "cliente1@example.com",
+                        "name": "Cliente 1"
+                    },
+                    "type": "required"
+                },
+                {
+                    "emailAddress": {
+                        "address": "funcionario@example.com",
+                        "name": "Funcionário Exemplo"
+                    },
+                    "type": "required"
+                }
+            ],
+            "organizer": {
+                "emailAddress": {
+                    "address": "organizador@example.com",
+                    "name": "Daniel 1"
+                }
+            },
+            "serviceId": "service_1234",
+            "serviceName": "Consultoria de Marketing",
+            "serviceDuration": 60,
+            "status": "confirmed"
+        },
+        {
+            "id": "2",
+            "subject": "Reunião de Equipe",
+            "start": {
+                "dateTime": "2025-08-13T14:00:00",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2025-08-13T15:00:00",
+                "timeZone": "UTC"
+            },
+            "location": {
+                "displayName": "Sala 2"
+            },
+            "attendees": [
+                {
+                    "emailAddress": {
+                        "address": "cliente2@example.com",
+                        "name": "Cliente 2"
+                    },
+                    "type": "required"
+                }
+            ],
+            "organizer": {
+                "emailAddress": {
+                    "address": "organizador@example.com",
+                    "name": "Organizador"
+                }
+            },
+            "serviceId": "service_5678",
+            "serviceName": "Consultoria Financeira",
+            "serviceDuration": 60,
+            "status": "confirmed"
+        },
+        {
+            "id": "3",
+            "subject": "Reunião de Planejamento",
+            "start": {
+                "dateTime": "2025-08-11T11:00:00",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2025-08-11T12:00:00",
+                "timeZone": "UTC"
+            },
+            "location": {
+                "displayName": "Sala 1"
+            },
+            "attendees": [
+                {
+                    "emailAddress": {
+                        "address": "cliente1@example.com",
+                        "name": "Cliente 1"
+                    },
+                    "type": "required"
+                },
+                {
+                    "emailAddress": {
+                        "address": "funcionario@example.com",
+                        "name": "Funcionário Exemplo"
+                    },
+                    "type": "required"
+                }
+            ],
+            "organizer": {
+                "emailAddress": {
+                    "address": "organizador@example.com",
+                    "name": "Daniel 2"
+                }
+            },
+            "serviceId": "service_1234",
+            "serviceName": "Consultoria de Marketing",
+            "serviceDuration": 60,
+            "status": "confirmed"
+        },
+        {
+            "id": "3",
+            "subject": "Reunião de Planejamento",
+            "start": {
+                "dateTime": "2025-08-11T12:00:00",
+                "timeZone": "UTC"
+            },
+            "end": {
+                "dateTime": "2025-08-11T13:00:30",
+                "timeZone": "UTC"
+            },
+            "location": {
+                "displayName": "Sala 1"
+            },
+            "attendees": [
+                {
+                    "emailAddress": {
+                        "address": "cliente1@example.com",
+                        "name": "Cliente 1"
+                    },
+                    "type": "required"
+                },
+                {
+                    "emailAddress": {
+                        "address": "funcionario@example.com",
+                        "name": "Funcionário Exemplo"
+                    },
+                    "type": "required"
+                }
+            ],
+            "organizer": {
+                "emailAddress": {
+                    "address": "organizador@example.com",
+                    "name": "Daniel 3"
+                }
+            },
+            "serviceId": "service_1234",
+            "serviceName": "Consultoria de Marketing",
+            "serviceDuration": 60,
+            "status": "confirmed"
+        }
+    ]
+}
